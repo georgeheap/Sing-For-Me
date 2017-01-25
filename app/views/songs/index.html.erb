@@ -1,0 +1,50 @@
+<h1 class="col-md-12 header">Lyrics Search</h1>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="search col-md-7 col-md-offset-2">
+  <%= form_tag("/songs", method: "get") do %>
+    <%= label_tag(:lyrics, "Search for lyrics:") %>
+    <%= text_field_tag :lyrics %>
+    <%= submit_tag("Search") %>
+    <%= label_tag(:artist, "Search by artist: ") %>
+    <%= text_field_tag :artist %>
+    <%= submit_tag("Search") %>
+  <% end %>
+</div>
+<div class="col-md-3">
+  <%= link_to "Clear", songs_path, :class => "clear" %>
+</div>
+<div class="paginate col-md-10 col-md-offset-2">
+  <%= will_paginate @songs %>
+</div>
+<h2 class="col-md-11 col-md-offset-1">Songs:</h2>
+<div class="songs col-md-10 col-md-offset-2"
+<% @songs.each do |song| %>
+  <p><%=link_to song.name, song_path(song.id) %> - <%= song.artist.name %></p>
+<% end %>
+</div>
+<div class="paginate col-md-10 col-md-offset-2">
+  <hr class="col-md-9 col-md-offset-1">
+  <%= will_paginate @songs %>
+</div>
+
+<script>
+$(function () {
+  var songs = [];
+  $("#lyrics").autocomplete({
+    source: songs
+  }).
+  on("keyup", function (e) {
+    if (this.value.length >= 3) {
+      $.get("/songs.json?q=" + this.value, function (data) {
+        // $(".songs, .ajax_results").empty();
+        // for(var i = 0; i < data.length; i++) {
+        //   $(".ajax_results").append('<li>${data[i].name}</li>');
+        // }
+        $("#lyrics").autocomplete('option', 'source', data);
+      });
+    }
+  });
+});
+</script>

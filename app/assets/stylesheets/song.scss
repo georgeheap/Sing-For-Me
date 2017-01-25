@@ -1,0 +1,51 @@
+// Place all the styles related to the Song controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.header {
+  text-align: center;
+  font {
+    size: 3rem;
+    weight: 600;
+  }
+}
+.artist {
+  font-size: 2rem;
+  text-align: center;
+}
+.lyrics {
+  margin: 3rem 10rem;
+}
+.search {
+  text-align: center;
+}
+input[type=text] {
+  border:2px solid #ccc;
+  border-radius: 4px;
+}
+input[type=text]:focus {
+  border-color:#333;
+}
+input[type=submit] {
+  background:#ccc;
+  border:0 none;
+  cursor:pointer;
+  border-radius: 5px;
+  margin-right: 3rem;
+}
+.pagination {
+  display: inline;
+}
+.clear {
+  background-color: #ccc;
+  padding: .4rem 1.5rem;
+  border-radius: 5px;
+  color: black;
+  a {
+    text-decoration: none;
+    &:hover {
+      color: black;
+      text-decoration: none;
+
+    }
+  }
+}

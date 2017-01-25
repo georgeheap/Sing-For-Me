@@ -1,0 +1,80 @@
+<!-- React -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-with-addons.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js'></script>
+  </head>
+
+
+  <body>
+
+    <div id="container"></div>
+
+    <script>
+      window.onload = function () {
+        var coolForms = [];
+
+  // Component
+  var FurnitureForm = React.createClass({
+      propTypes: {
+          formID: React.PropTypes.number.isRequired,
+          name: React.PropTypes.string
+      },
+      render: function () {
+          return React.createElement(
+            "div",
+            {key: this.props.formID},
+            React.createElement(
+              "select",
+              null,
+              React.createElement(
+                "option",
+                { value: "1" },
+                "Chair"
+              ),
+              React.createElement(
+                "option",
+                { value: "2" },
+                "Table"
+              ),
+              React.createElement(
+                "option",
+                { value: "3" },
+                "Effigy"
+              ),
+              React.createElement(
+                "option",
+                { value: "4" },
+                "Ottoman"
+              ),
+              React.createElement(
+                "option",
+                { value: "4" },
+                "Totem Pole"
+              ),
+              React.createElement(
+                "option",
+                { value: "5" },
+                "Spoon"
+              )
+            ),
+            React.createElement("input", { type: "text", value: this.props.name })
+          );
+        }
+      });
+
+      for (var i = 0; i < 10; ++i) {
+          // Build 10 components from FurnitureForm
+          coolForms.push(React.createElement(FurnitureForm,
+            { formID: i, name: "Person " + i.toString()}
+          ));
+      }
+      var root = React.createElement("div", null, coolForms);
+      ReactDOM.render(root, document.getElementById("container"));
+      };
+    </script>
+  </body>
+</html>
